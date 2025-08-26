@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import { jsPDF } from "jspdf";
 import * as htmlToImage from "html-to-image";
 import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
-import Image from "next/image";
 import Logo from "../../../public/logo.png";
 
 const Page = () => {
@@ -272,10 +271,14 @@ const Page = () => {
               {/* Header */}
 
               <div className="text-center">
-              <img src={Logo?.src} alt="Logo" className="w-23 h-23 inline-block" />
-         </div>
+                <img
+                  src={Logo?.src}
+                  alt="Logo"
+                  className="w-23 h-23 inline-block"
+                />
+              </div>
 
-              <hr 
+              <hr
                 style={{
                   marginBottom: "0.5rem", // mb-2 = 8px
                 }}
@@ -423,7 +426,10 @@ const Page = () => {
             {/* Download button */}
           </div>
           <DialogFooter>
-            <Button className="w-full cursor-pointer   bg-green-500" onClick={handleDownload}>
+            <Button
+              className="w-full cursor-pointer   bg-green-500"
+              onClick={handleDownload}
+            >
               {t("button_download")}
             </Button>
           </DialogFooter>
