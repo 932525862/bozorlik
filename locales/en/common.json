@@ -11,6 +11,7 @@
      "others": "Product name",
      "dialogTitle": "Enter the product you want to buy",
     "productName": "Product name",
+    "add_all_to_basket": "Repeat the list",
     "productNamePlaceholder": "Example: Apple",
     "productType": "Product type",
     "productTypePlaceholder": "Example: Fruit",

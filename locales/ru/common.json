@@ -3,6 +3,7 @@
     "basket": "Корзина",
     "history": "История",
     "title": "Список покупок",
+    "add_all_to_basket": "Повторить список",
     "createList": "Создать список",
     "purchased": "Куплено {{purchased}} из {{total}} товаров",
     "emptyList": "Создайте список покупок",
