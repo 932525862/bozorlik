@@ -244,74 +244,83 @@ export default function ShoppingPlatform() {
 
               {/* Modal (Dialog) */}
               <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle>{t("dialogTitle")}</DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-4 py-2">
-                    <div className="space-y-2">
-                      <Label>{t("productName")}</Label>
-                      <Input
-                        name="productName"
-                        placeholder={t("productNamePlaceholder1")}
-                        value={form.productName}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>{t("quantity1")}</Label>
-                      <Input
-                        name="quantity"
-                        placeholder={t("quantityPlaceholder1")}
-                        value={form.quantity}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="unitId">Birlikni tanlang</Label>
-                      <Select
-                        value={form?.unitId}
-                        onValueChange={(value) => setForm({ ...form, unitId: value })}
-                      >
-                        <SelectTrigger id="unitId" className="w-full">
-                          <SelectValue placeholder="Birlik tanlang" />
-                        </SelectTrigger>
-                        <SelectContent className="w-full">
-                          {units?.items?.map((item: any) => (
-                            <SelectItem key={item?.id} value={item?.id}>
-                              {item?.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="marketId">Bozorlikni tanlang</Label>
-                      <Select
-                        value={form?.marketId}
-                        onValueChange={(value) => setForm({ ...form, marketId: value })}
-                      >
-                        <SelectTrigger id="marketId" className="w-full">
-                          <SelectValue placeholder="Bozorlik tanlang" />
-                        </SelectTrigger>
-                        <SelectContent className="w-full">
-                          {shoppingList?.map((item: any) => (
-                            <SelectItem key={item?.id} value={item?.id}>
-                              {item?.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+  <DialogContent className="sm:max-w-md">
+    <DialogHeader>
+      <DialogTitle>{t("dialogTitle")}</DialogTitle>
+    </DialogHeader>
+    <div className="space-y-4 py-2">
+      <div className="space-y-2">
+        <Label>{t("productName")}</Label>
+        <Input
+          name="productName"
+          placeholder={t("productNamePlaceholder1")}
+          value={form.productName}
+          onChange={handleInputChange}
+        />
+      </div>
 
-                  </div>
-                  <DialogFooter>
-                    <Button disabled={extraLoading} className="bg-[#09bcbf] cursor-pointer" onClick={handleSubmit}>
-                      {t("addToBasket")}
-                    </Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
+      {/* Miqdor va O‘lchov birligi yonma-yon */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label>{t("quantity1")}</Label>
+          <Input
+            name="quantity"
+            placeholder={t("quantityPlaceholder1")}
+            value={form.quantity}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="unitId">{t("extraProduct.unitLabel")}</Label>
+          <Select
+            value={form?.unitId}
+            onValueChange={(value) => setForm({ ...form, unitId: value })}
+          >
+            <SelectTrigger id="unitId" className="w-full">
+              <SelectValue placeholder={t("mas")}/>
+            </SelectTrigger>
+            <SelectContent className="w-full">
+              {units?.items?.map((item: any) => (
+                <SelectItem key={item?.id} value={item?.id}>
+                  {item?.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="marketId">{t("roy")}</Label>
+        <Select
+          value={form?.marketId}
+          onValueChange={(value) => setForm({ ...form, marketId: value })}
+        >
+          <SelectTrigger id="marketId" className="w-full">
+            <SelectValue placeholder={t("roy")} />
+          </SelectTrigger>
+          <SelectContent className="w-full">
+            {shoppingList?.map((item: any) => (
+              <SelectItem key={item?.id} value={item?.id}>
+                {item?.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+    <DialogFooter>
+      <Button
+        disabled={extraLoading}
+        className="bg-[#09bcbf] cursor-pointer"
+        onClick={handleSubmit}
+      >
+        {t("addToBasket")}
+      </Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+
             </div>
           </div>
         </main>
