@@ -129,10 +129,6 @@ const Page = () => {
     getData();
   }, [id]);
 
-  const totalQuantity = shoppingHistory?.marketLists?.reduce(
-    (acc: any, p: any) => acc + p.quantity,
-    0
-  );
   const totalPrice = shoppingHistory?.marketLists?.reduce(
     (acc: any, p: any) => acc + p.price * p.quantity,
     0
@@ -276,10 +272,10 @@ const Page = () => {
               {/* Header */}
 
               <div className="text-center">
-  <Image src={Logo} alt="Logo" className="w-23 h-23 inline-block" />
+              <img src={Logo?.src} alt="Logo" className="w-23 h-23 inline-block" />
          </div>
 
-              <hr
+              <hr 
                 style={{
                   marginBottom: "0.5rem", // mb-2 = 8px
                 }}
@@ -292,7 +288,7 @@ const Page = () => {
                   marginBottom: "0.5rem", // mb-2 = 8px
                 }}
               >
-                Bozorlik #1
+                Bozorlik {shoppingHistory?.name}
               </p>
 
               {/* Products */}
