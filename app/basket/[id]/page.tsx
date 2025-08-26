@@ -210,7 +210,7 @@ const page = () => {
       marketId: id,
       quantity: extraProductQuantity,
       productName: extraProductName,
-      unidId: unit,
+      unitId: unit,
     };
 
     addProductExtra(data);
@@ -461,79 +461,86 @@ const page = () => {
         onOpenChange={setShowExtraProductDialog}
       >
         <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{t("extraProduct.title")}</DialogTitle>
-            <DialogDescription>
-              {t("extraProduct.description")}
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="extraProductName">
-                {t("extraProduct.nameLabel")}
-              </Label>
-              <Input
-                id="extraProductName"
-                value={extraProductName}
-                onChange={(e) => setExtraProductName(e.target.value)}
-                placeholder={t("extraProduct.namePlaceholder")}
+  <DialogHeader>
+    <DialogTitle>{t("extraProduct.title")}</DialogTitle>
+    <DialogDescription>
+      {t("extraProduct.description")}
+    </DialogDescription>
+  </DialogHeader>
+  <div className="space-y-6">
+    <div className="space-y-2">
+      <Label htmlFor="extraProductName">
+        {t("extraProduct.nameLabel")}
+      </Label>
+      <Input
+        id="extraProductName"
+        value={extraProductName}
+        onChange={(e) => setExtraProductName(e.target.value)}
+        placeholder={t("extraProduct.namePlaceholder")}
+      />
+    </div>
+
+    {/* Miqdor + O‘lchov birligi yonma-yon */}
+    <div className="space-y-2">
+      <div className="flex gap-2">
+        <div className="w-1/2">
+          <Label htmlFor="extraProductQuantity">
+            {t("extraProduct.quantityLabel")}
+          </Label>
+          <Input
+            id="extraProductQuantity"
+            type="number"
+            step="0.1"
+            min="0.1"
+            value={extraProductQuantity}
+            onChange={(e) => setExtraProductQuantity(e.target.value)}
+            placeholder={t("extraProduct.quantityPlaceholder")}
+          />
+        </div>
+        <div className="w-1/2">
+          <Label htmlFor="unitId">{t("extraProduct.unitLabel")}</Label>
+          <Select
+            value={unit}
+            onValueChange={(value) => setUnit(value)}
+            required
+          >
+            <SelectTrigger id="unitId" className="w-full">
+              <SelectValue
+                placeholder={t("extraProduct.unitPlaceholder")}
               />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="extraProductQuantity">
-                {t("extraProduct.quantityLabel")}
-              </Label>
-              <Input
-                id="extraProductQuantity"
-                type="number"
-                step="0.1"
-                min="0.1"
-                value={extraProductQuantity}
-                onChange={(e) => setExtraProductQuantity(e.target.value)}
-                placeholder={t("extraProduct.quantityPlaceholder")}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="unitId">{t("extraProduct.unitLabel")}</Label>
-              <Select
-                value={unit}
-                onValueChange={(value) => setUnit(value)}
-                required
-              >
-                <SelectTrigger id="unitId" className="w-full">
-                  <SelectValue
-                    placeholder={t("extraProduct.unitPlaceholder")}
-                  />
-                </SelectTrigger>
-                <SelectContent className="w-full">
-                  {units?.items?.map((item: any) => (
-                    <SelectItem key={item?.id} value={item?.id}>
-                      {item?.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button
-              variant="outline"
-              className="cursor-pointer"
-              onClick={() => setShowExtraProductDialog(false)}
-            >
-              {t("extraProduct.cancel")}
-            </Button>
-            <Button
-              onClick={handleAddExtraProduct}
-              className="cursor-pointer"
-              disabled={
-                extraLoading && !extraProductName && !extraProductQuantity
-              }
-            >
-              {t("extraProduct.add")}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
+            </SelectTrigger>
+            <SelectContent className="w-full">
+              {units?.items?.map((item: any) => (
+                <SelectItem key={item?.id} value={item?.id}>
+                  {item?.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <DialogFooter>
+    <Button
+      variant="outline"
+      className="cursor-pointer"
+      onClick={() => setShowExtraProductDialog(false)}
+    >
+      {t("extraProduct.cancel")}
+    </Button>
+    <Button
+      onClick={handleAddExtraProduct}
+      className="cursor-pointer"
+      disabled={
+        extraLoading && !extraProductName && !extraProductQuantity
+      }
+    >
+      {t("extraProduct.add")}
+    </Button>
+  </DialogFooter>
+</DialogContent>
       </Dialog>
       <Dialog open={showPriceDialog} onOpenChange={setShowPriceDialog}>
         <DialogContent>
