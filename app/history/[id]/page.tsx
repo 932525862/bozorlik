@@ -411,7 +411,7 @@ const Page = () => {
                 }}
               >
                 <span>
-                  {t("product_total_quantity", { count: totalQuantity })}
+                  {t("product_total_quantity", { count: shoppingHistory?.marketLists?.length })}
                 </span>
               </div>
               <div
