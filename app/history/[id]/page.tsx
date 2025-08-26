@@ -291,7 +291,7 @@ const Page = () => {
                   marginBottom: "0.5rem", // mb-2 = 8px
                 }}
               >
-                Bozorlik {shoppingHistory?.name}
+                Bozorlik: {shoppingHistory?.name}
               </p>
 
               {/* Products */}
