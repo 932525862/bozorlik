@@ -198,20 +198,21 @@ export default function ShoppingPlatform() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
               <Card
                 onClick={() => setOpen(true)}
-                className="group cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-2xl bg-[#47c77d] hover:bg-gray-100 transition-all duration-300"
+                className="group cursor-pointer flex flex-col items-center justify-center rounded-2xl bg-[#85dc3c] hover:bg-gray-100 transition-all duration-300"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <div className="flex items-center justify-center w-20 h-20 rounded-full bg-[#47c77d]">
-                    <ShoppingCart className="h-17 w-17 text-[#ffffff]" />
+                  <div className="flex items-center justify-center w-20 h-20 rounded-full ">
+                    <ShoppingCart className="h-20 w-20 text-white group-hover:text-[#30c3c4] transition-colors duration-300" />
                   </div>
-                  <p className="mt-2 text-2xl text-[#ffffff] font-medium">
+                  <p className="mt-2 text-2xl font-bold text-white group-hover:text-[#30c3c4] transition-colors duration-300">
                     {t("others")}
                   </p>
-                  <p className="mt-1 text-2xl text-[#ffffff]  font-medium">
+                  <p className="mt-1 text-2xl font-bold text-white group-hover:text-[#30c3c4] transition-colors duration-300">
                     {t("others1")}
                   </p>
                 </CardContent>
               </Card>
+
               {data?.items?.map((category) => (
                 <Card
                   key={category.id}
