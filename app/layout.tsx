@@ -7,9 +7,9 @@ import Providers from "./Providers";
 import ClientLayout from "./ClientLayout";
 
 export const metadata: Metadata = {
-  title: "Market App – Onlayn Bozorlik Ro‘yxati va Xarid Tarixi",
+  title: "Bozor App – Onlayn Bozorlik Ro‘yxati va Xarid Tarixi",
   description:
-    "Market App yordamida bozorlik ro‘yxati tuzing, mahsulotlarni boshqaring va xarid tarixingizni kuzatib boring. Eng qulay va oddiy bozorlik platformasi.",
+    "Bozor App yordamida bozorlik ro‘yxati tuzing, mahsulotlarni boshqaring va xarid tarixingizni kuzatib boring. Eng qulay va oddiy bozorlik platformasi.",
   keywords: [
     "bozorlik",
     "market app",
@@ -62,23 +62,28 @@ export const metadata: Metadata = {
     "Yashnobod",
     "Uchtepa",
     "Olmazor",
+    "Bozor app",
+    "bozorapp.uz",
+    "Bozorapp.uz",
+    "BOZOR APP"
+  
   ],
-  authors: [{ name: "Rustam" }], // seni yoki kompaniyangni ismi
-  creator: "Market App Team",
-  publisher: "Market App",
-  metadataBase: new URL("https://www.marketveb.uz/"), // sayting URL
+  authors: [{ name: "Bozor app" }], // seni yoki kompaniyangni ismi
+  creator: "Bozor App Team",
+  publisher: "Bozor App",
+  metadataBase: new URL("https://www.bozorapp.uz/"), // sayting URL
   openGraph: {
-    title: "Market App – Onlayn Bozorlik Ro‘yxati",
+    title: "Bozor App – Onlayn Bozorlik Ro‘yxati",
     description:
       "Qulay va tezkor bozorlik platformasi: mahsulotlarni boshqaring, savatni yuriting va xaridlaringiz tarixini kuzating.",
-    url: "https://www.marketveb.uz/",
-    siteName: "Market App",
+    url: "https://www.bozorapp.uz/",
+    siteName: "Bozor App",
     images: [
       {
-        url: "https://www.marketveb.uz/_next/static/media/logo.53fb42c4.png", // OpenGraph rasm
+        url: "https://www.bozorapp.uz/_next/static/media/logo.ff738a45.png", // OpenGraph rasm
         width: 1200,
         height: 630,
-        alt: "Market App – Onlayn Bozorlik Ro‘yxati",
+        alt: "Bozor App – Onlayn Bozorlik Ro‘yxati",
       },
     ],
     locale: "uz_UZ",
@@ -86,10 +91,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Market App – Onlayn Bozorlik Ro‘yxati",
+    title: "Bozor App – Onlayn Bozorlik Ro‘yxati",
     description:
-      "Market App yordamida bozorlik ro‘yxati tuzing va xaridlaringizni qulay boshqaring.",
-    images: ["https://www.marketveb.uz/_next/static/media/logo.53fb42c4.png"],
+      "Bozor App yordamida bozorlik ro‘yxati tuzing va xaridlaringizni qulay boshqaring.",
+    images: [""],
     creator: "@username", // twitter username bo‘lsa qo‘sh
   },
   category: "Shopping",
