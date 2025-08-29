@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     title: "Bozor App – Onlayn Bozorlik Ro‘yxati",
     description:
       "Bozor App yordamida bozorlik ro‘yxati tuzing va xaridlaringizni qulay boshqaring.",
-    images: [""],
+    images: ["https://www.bozorapp.uz/_next/static/media/logo.ff738a45.png"],
     creator: "@username", // twitter username bo‘lsa qo‘sh
   },
   category: "Shopping",
