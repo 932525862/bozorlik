@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -30,6 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import backrimg from "../public/bosqa.png";
 import BannerCarousel from "../app/baner/baner";
 // Mock registered users for demonstration
 
@@ -37,15 +37,11 @@ export default function ShoppingPlatform() {
   const router = useRouter();
   const [listName, setListName] = useState("");
   const [showStartDialog, setShowStartDialog] = useState(false);
-  const {
-    setShoppingId,
-    setShoppingList,
-    shoppingList,
-  } = useShoppingStore();
+  const { setShoppingId, setShoppingList, shoppingList } = useShoppingStore();
   const [search, setSearch] = useState("");
   const { t, i18n } = useTranslation("common");
   const { user } = useStore();
-  const [unit, setUnit] = useState<string>("")
+  const [unit, setUnit] = useState<string>("");
 
   const { mutate } = useApiMutation({
     url: "market",
@@ -72,10 +68,9 @@ export default function ShoppingPlatform() {
     },
   });
   const { data: units } = useFetch<any>({
-    key: ["unit",],
+    key: ["unit"],
     url: "/unit",
   });
-
 
   const handleCategoryClick = (id: string) => {
     router.push(`/categories/${id}`); // Sahifaga yo‘naltiramiz
@@ -99,7 +94,12 @@ export default function ShoppingPlatform() {
   };
 
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ productName: "",  quantity: "", marketId: "", unitId: "" });
+  const [form, setForm] = useState({
+    productName: "",
+    quantity: "",
+    marketId: "",
+    unitId: "",
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -109,9 +109,9 @@ export default function ShoppingPlatform() {
     url: "market-list",
     method: "POST",
     onSuccess: () => {
-      toast.success("Mahsulot qo'shildi")
+      toast.success("Mahsulot qo'shildi");
       setOpen(false);
-      setForm({ productName: "",  quantity: "", marketId: "", unitId: "" });
+      setForm({ productName: "", quantity: "", marketId: "", unitId: "" });
     },
     onError: (error: any) => {
       toast.error(error.response?.data?.message);
@@ -119,8 +119,7 @@ export default function ShoppingPlatform() {
   });
 
   const handleSubmit = () => {
-    addProductExtra(form)
-    
+    addProductExtra(form);
   };
 
   return (
@@ -185,9 +184,8 @@ export default function ShoppingPlatform() {
             </div>
 
             {/* Promotional Banner Carousel */}
-              
-            <BannerCarousel />
 
+            <BannerCarousel />
 
             {/* Bu  oraliqa  baner chaqiriladi   */}
 
@@ -200,13 +198,17 @@ export default function ShoppingPlatform() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
               <Card
                 onClick={() => setOpen(true)}
-                className="group cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-all duration-300"
+                className="group cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-2xl bg-[#47c77d] hover:bg-gray-100 transition-all duration-300"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <Plus className="h-10 w-10 text-gray-500 group-hover:text-[#09bcbf] transition-colors" />
-                  <p className="mt-2 text-gray-600 font-medium">
-                    {" "}
+                  <div className="flex items-center justify-center w-20 h-20 rounded-full bg-[#47c77d]">
+                    <ShoppingCart className="h-17 w-17 text-[#ffffff]" />
+                  </div>
+                  <p className="mt-2 text-2xl text-[#ffffff] font-medium">
                     {t("others")}
+                  </p>
+                  <p className="mt-1 text-2xl text-[#ffffff]  font-medium">
+                    {t("others1")}
                   </p>
                 </CardContent>
               </Card>
@@ -244,83 +246,91 @@ export default function ShoppingPlatform() {
 
               {/* Modal (Dialog) */}
               <Dialog open={open} onOpenChange={setOpen}>
-  <DialogContent className="sm:max-w-md">
-    <DialogHeader>
-      <DialogTitle>{t("dialogTitle")}</DialogTitle>
-    </DialogHeader>
-    <div className="space-y-4 py-2">
-      <div className="space-y-2">
-        <Label>{t("productName")}</Label>
-        <Input
-          name="productName"
-          placeholder={t("productNamePlaceholder1")}
-          value={form.productName}
-          onChange={handleInputChange}
-        />
-      </div>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>{t("dialogTitle")}</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4 py-2">
+                    <div className="space-y-2">
+                      <Label>{t("productName")}</Label>
+                      <Input
+                        name="productName"
+                        placeholder={t("productNamePlaceholder1")}
+                        value={form.productName}
+                        onChange={handleInputChange}
+                        className="bg-no-repeat bg-right bg-[length:20px_20px]"
+                        style={{
+                          backgroundImage: `linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url(${backrimg.src})`,
+                        }}
+                      />
+                    </div>
+                    {/* Miqdor va O‘lchov birligi yonma-yon */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>{t("quantity1")}</Label>
+                        <Input
+                          name="quantity"
+                          placeholder={t("quantityPlaceholder1")}
+                          value={form.quantity}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="unitId">
+                          {t("extraProduct.unitLabel")}
+                        </Label>
+                        <Select
+                          value={form?.unitId}
+                          onValueChange={(value) =>
+                            setForm({ ...form, unitId: value })
+                          }
+                        >
+                          <SelectTrigger id="unitId" className="w-full">
+                            <SelectValue placeholder={t("mas")} />
+                          </SelectTrigger>
+                          <SelectContent className="w-full">
+                            {units?.items?.map((item: any) => (
+                              <SelectItem key={item?.id} value={item?.id}>
+                                {item?.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
 
-      {/* Miqdor va O‘lchov birligi yonma-yon */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label>{t("quantity1")}</Label>
-          <Input
-            name="quantity"
-            placeholder={t("quantityPlaceholder1")}
-            value={form.quantity}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="unitId">{t("extraProduct.unitLabel")}</Label>
-          <Select
-            value={form?.unitId}
-            onValueChange={(value) => setForm({ ...form, unitId: value })}
-          >
-            <SelectTrigger id="unitId" className="w-full">
-              <SelectValue placeholder={t("mas")}/>
-            </SelectTrigger>
-            <SelectContent className="w-full">
-              {units?.items?.map((item: any) => (
-                <SelectItem key={item?.id} value={item?.id}>
-                  {item?.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="marketId">{t("roy")}</Label>
-        <Select
-          value={form?.marketId}
-          onValueChange={(value) => setForm({ ...form, marketId: value })}
-        >
-          <SelectTrigger id="marketId" className="w-full">
-            <SelectValue placeholder={t("roy")} />
-          </SelectTrigger>
-          <SelectContent className="w-full">
-            {shoppingList?.map((item: any) => (
-              <SelectItem key={item?.id} value={item?.id}>
-                {item?.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-    <DialogFooter>
-      <Button
-        disabled={extraLoading}
-        className="bg-[#09bcbf] cursor-pointer"
-        onClick={handleSubmit}
-      >
-        {t("addToBasket")}
-      </Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
-
+                    <div className="space-y-2">
+                      <Label htmlFor="marketId">{t("roy")}</Label>
+                      <Select
+                        value={form?.marketId}
+                        onValueChange={(value) =>
+                          setForm({ ...form, marketId: value })
+                        }
+                      >
+                        <SelectTrigger id="marketId" className="w-full">
+                          <SelectValue placeholder={t("roy")} />
+                        </SelectTrigger>
+                        <SelectContent className="w-full">
+                          {shoppingList?.map((item: any) => (
+                            <SelectItem key={item?.id} value={item?.id}>
+                              {item?.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button
+                      disabled={extraLoading}
+                      className="bg-[#09bcbf] cursor-pointer"
+                      onClick={handleSubmit}
+                    >
+                      {t("addToBasket")}
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </main>
@@ -347,14 +357,16 @@ export default function ShoppingPlatform() {
               </div>
             </div>
             <DialogFooter>
-              <Button onClick={handleStartShopping} className="cursor-pointer" disabled={!listName.trim()}>
+              <Button
+                onClick={handleStartShopping}
+                className="cursor-pointer"
+                disabled={!listName.trim()}
+              >
                 {t("createListBtn")}
               </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
-
-        
       </div>
     </>
   );
