@@ -149,7 +149,7 @@ export default function ShoppingPlatform() {
                 </div>
                 <Button
                   onClick={() => setShowStartDialog(true)}
-                  className="bg-[#dd993e] hover:bg-[#09bcbf] cursor-pointer text-white"
+                  className="bg-[#85dc3c] hover:bg-[#30c3c4] fond-bold text-xm cursor-pointer text-white"
                 >
                   {t("createList")}
                 </Button>
