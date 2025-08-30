@@ -109,7 +109,7 @@ const Page = () => {
                 <ShoppingCart className="h-20 w-20 text-[#30c3c4] transition-colors duration-300" />
               </div>
               <p className="text-gray-700 text-lg font-medium">
-                Sizda ayni vaqtda faol bozorlik ro‘yxati yo‘q
+                {t("markets")}
               </p>
               <Button
                 onClick={() => setShowStartDialog(true)}

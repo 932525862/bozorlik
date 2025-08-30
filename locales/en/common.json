@@ -12,6 +12,7 @@
 "others1": "Fill the cart",
      "dialogTitle": "Enter the product you want to buy",
     "productName": "Product name",
+    "markets":"You currently don’t have an active shopping list",
     "add_all_to_basket": "Repeat the list",
     "productNamePlaceholder": "Example: Apple",
     "productType": "Product type",

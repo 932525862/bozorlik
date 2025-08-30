@@ -25,6 +25,7 @@
   "shoppingListNameLabel": "Bozorlik ro'yxati nomi",
   "shoppingListNamePlaceholder": "masalan, Haftalik oziq-ovqat, Ziyofat uchun bozorlik...",
   "createListBtn": "Ro'yxat yaratish",
+  "markets":"Sizda ayni vaqtda faol bozorlik ro‘yxati yo‘q",
   "extraProductTitle": "Qo'shimcha mahsulot qo'shish",
   "extraProductDesc": "Ro'yxatda yo'q mahsulot nomi va miqdorini kiriting",
   "productName1": "Mahsulot nomi",
