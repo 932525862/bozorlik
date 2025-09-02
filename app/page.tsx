@@ -195,7 +195,7 @@ export default function ShoppingPlatform() {
               </h2>
               <p className="text-gray-600">{t("chooseCategoryDesc")}</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <Card
                 onClick={() => setOpen(true)}
                 className="group cursor-pointer flex flex-col items-center justify-center rounded-2xl bg-[#85dc3c] hover:bg-gray-100 transition-all duration-300"
