@@ -181,9 +181,7 @@ const CategoryPage = () => {
                   ? product?.titleRu
                   : product?.titleEn}
               </h3>
-              <p className="text-sm text-gray-500 text-center">
-                har {product.unit || "dona"}
-              </p>
+              
             </CardContent>
           </Card>
         ))}

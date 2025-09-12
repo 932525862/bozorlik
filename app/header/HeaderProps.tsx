@@ -1,6 +1,6 @@
 "use client"
 
-import { ShoppingCart, User, Home, History, Settings, Languages, LayoutGrid } from "lucide-react"
+import { ShoppingCart, User, Home, History, Settings, Languages ,LayoutGrid } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
@@ -32,7 +32,7 @@ export default function Header() {
   const { user } = useStore();
   const { shoppingList, setShoppingListAll } =
       useShoppingStore();
-  const getMarkets = async () => {
+const getMarkets = async () => {
     try {
       const response = await api.get("/market");
       setShoppingListAll(response?.data?.data)
@@ -51,7 +51,9 @@ export default function Header() {
   const handleHistoryClick = () => router.push(`/history`)
   const handleHomeClick = () => router.push(`/`)
   const handleSettingsClick = () => router.push(`/profile`)
-  const handleCategoriesClick = () => router.push(`/categories`)
+  const handlCatigoriesClick = () => router.push(`/categories`)
+
+  
 
   const handleLanguageChange = (lng: string) => {
     i18n.changeLanguage(lng)
@@ -61,7 +63,58 @@ export default function Header() {
     <>
       {/* DESKTOP NAVBAR */}
       <header className="bg-white shadow-sm border-b hidden md:block">
-        {/* ... DESKTOP qismini o'zgartirmadim ... */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-1" onClick={handleSettingsClick}>
+              
+              <button  className="flex flex-col cursor-pointer items-center text-gray-600">
+              <User className="h-8 w-8 text-blue-600" />
+           
+          </button>
+              <button
+                
+                className="text-base font-semibold cursor-pointer text-gray-900 focus:outline-none"
+              >
+                {user?.fullName}
+              </button>
+              {/* <p className="text-sm text-gray-500">{t("welcome")}</p> */}
+            </div>
+
+            <div className="flex items-center space-x-4">
+              {/* Til select faqat desktopda */}
+              <select
+                value={currentLang}
+                onChange={(e) => handleLanguageChange(e.target.value)}
+                className="border rounded-lg px-2 py-[9px] text-sm focus:outline-none focus:ring-2 focus:ring-[#09bcbf] hidden md:block"
+              >
+                {languages.map((lng) => (
+                  <option key={lng.code} value={lng.code}>
+                    {lng.flag} {lng.label}
+                  </option>
+                ))}
+              </select>
+              <Button className="bg-[#09bcbf] cursor-pointer" onClick={handlCatigoriesClick}>
+                {t("historyx")}
+              </Button>
+              <Button
+                onClick={handleBasketClick}
+                className="bg-[#09bcbf] relative cursor-pointer"
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                {t("basket")}
+                {shoppingList?.length > 0 && (
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
+                    {shoppingList.length}
+                  </Badge>
+                )}
+              </Button>
+              <Button className="bg-[#09bcbf] cursor-pointer" onClick={handleHistoryClick}>
+                {t("history")}
+              </Button>
+              
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* MOBILE BOTTOM NAVBAR */}
@@ -73,13 +126,11 @@ export default function Header() {
             <span className="text-xs">{t("home")}</span>
           </button>
 
-          {/* Categories */}
-          <button onClick={handleCategoriesClick} className="flex flex-col items-center cursor-pointer text-gray-600">
+          <button onClick={handlCatigoriesClick} className="flex flex-col items-center cursor-pointer text-gray-600">
             <LayoutGrid className="h-6 w-6" />
             <span className="text-xs">{t("historym")}</span>
           </button>
-
-          {/* LANGUAGE SELECT */}
+          {/* LANGUAGE SELECT (Dialog) faqat mobil uchun */}
           <Dialog>
             <DialogTrigger asChild>
               <button className="flex flex-col items-center cursor-pointer text-gray-600">
