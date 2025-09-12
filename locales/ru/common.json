@@ -249,10 +249,16 @@
   "error_general": "Произошла ошибка",
   "success_added_to_market": "Добавлено в список покупок",
   "button_download_check_pdf": "Скачать чек PDF",
-  "product_total_quantity": "Количество товаров: {{count}} шт.",
+  "product_total_text": "Количество товаров:",
+"product_total_quantity": "шт",
+
   "total_label": "Итого:",
   "total_price": "{{price}} сум",
   "button_download": "Скачать",
+  "valuta": "сум",
+  "market_name": "Название рынка",
+  "date": "Дата",
+  "market_title": "Покупки",
   "success_phone_changed": "Ваш номер телефона был изменен",
   "success_feedback_sent": "Ваши отзывы и предложения отправлены!",
   "button_delete": "Удалить"

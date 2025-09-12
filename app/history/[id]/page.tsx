@@ -15,6 +15,7 @@ import { jsPDF } from "jspdf";
 import * as htmlToImage from "html-to-image";
 import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
 import Logo from "../../../public/logo.png";
+import { formatDate } from "@/lib/utils";
 
 const Page = () => {
   const [shoppingHistory, setShoppingHistory] = useState<any>([]);
@@ -127,7 +128,8 @@ const Page = () => {
   useEffect(() => {
     getData();
   }, [id]);
-
+ console.log(shoppingHistory);
+ 
   const totalPrice = shoppingHistory?.marketLists?.reduce(
     (acc: any, p: any) => acc + p.price * p.quantity,
     0
@@ -291,7 +293,7 @@ const Page = () => {
                   marginBottom: "0.5rem", // mb-2 = 8px
                 }}
               >
-                Bozorlik: {shoppingHistory?.name}
+                {t("market_title")}: {shoppingHistory?.name}
               </p>
 
               {/* Products */}
@@ -385,7 +387,7 @@ const Page = () => {
                         </p>
                       </div>
                     </div>
-                    <p>{list.price * list.quantity} so‘m</p>
+                    <p>{list.price * list.quantity} {t("valuta")}</p>
                   </div>
                 ))}
               </div>
@@ -406,10 +408,9 @@ const Page = () => {
                 }}
               >
                 <span>
-                  {t("product_total_quantity", {
-                    count: shoppingHistory?.marketLists?.length,
-                  })}
+                  {t("product_total_text")}
                 </span>
+                <span>{shoppingHistory?.marketLists?.length} {t("product_total_quantity")}</span>
               </div>
               <div
                 style={{
@@ -420,6 +421,26 @@ const Page = () => {
               >
                 <span>{t("total_label")}</span>
                 <span>{t("total_price", { price: totalPrice })}</span>
+              </div>
+              <div
+                style={{
+                  display: "flex", // flex
+                  justifyContent: "space-between", // justify-between
+                  fontWeight: "bold", // font-bold = 700
+                }}
+              >
+                <span>{t("market_name")}:</span>
+                <span>{shoppingHistory?.location}</span>
+              </div>
+              <div
+                style={{
+                  display: "flex", // flex
+                  justifyContent: "space-between", // justify-between
+                  fontWeight: "bold", // font-bold = 700
+                }}
+              >
+                <span>{t("date")}:</span>
+                <span>{formatDate(shoppingHistory?.createdAt)}</span>
               </div>
             </div>
 

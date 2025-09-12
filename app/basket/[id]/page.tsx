@@ -74,11 +74,11 @@ const page = () => {
     }));
   };
 
-  const setBuyingTrue = (id: any, price: string) => {
+  const setBuyingTrue = (id: any, price: string, user: any) => {
     setList((prev: any) => ({
       ...prev,
       marketLists: prev?.marketLists.map((item: any) =>
-        item.id === id ? { ...item, isBuying: true, price: price } : item
+        item.id === id ? { ...item, isBuying: true, price: price, user } : item
       ),
     }));
   };
@@ -187,8 +187,8 @@ const page = () => {
   const { mutate: buyProduct, isLoading: buyLoading } = useApiMutation({
     url: `market-list/check-is-buying/${selectedProduct?.id}`,
     method: "PATCH",
-    onSuccess: () => {
-      setBuyingTrue(selectedProduct?.id, price);
+    onSuccess: (data) => {
+      setBuyingTrue(selectedProduct?.id, price, data?.data?.user);
       setShowPriceDialog(false);
       setPrice("");
       toast.success(t("toast.productPurchased"));
