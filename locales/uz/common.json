@@ -137,7 +137,9 @@
     "agree": "ga rozilik bildirasiz."
   },
   "toast": {
-    "loginSuccess": "Tizimga muvaffaqiyatli kirdingiz"
+    "loginSuccess": "Tizimga muvaffaqiyatli kirdingiz",
+    "productPurchased": "Товар куплен"
+
   },
   "languages": {
     "uz": "Uzb",
