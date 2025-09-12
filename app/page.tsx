@@ -32,7 +32,6 @@ import {
 import backrimg from "../public/bosqa.png";
 import BannerCarousel from "../app/baner/baner";
 
-
 export default function ShoppingPlatform() {
   const router = useRouter();
   const [listName, setListName] = useState("");
@@ -58,15 +57,15 @@ export default function ShoppingPlatform() {
     },
   });
 
-  const { data } = useFetch<any>({
-    key: ["category", search],
-    url: "/category",
-    config: {
-      params: {
-        search: search || null,
-      },
-    },
-  });
+  // const { data } = useFetch<any>({
+  //   key: ["category", search],
+  //   url: "/category",
+  //   config: {
+  //     params: {
+  //       search: search || null,
+  //     },
+  //   },
+  // });
   const { data: units } = useFetch<any>({
     key: ["unit"],
     url: "/unit",
@@ -78,7 +77,7 @@ export default function ShoppingPlatform() {
 
   const handleStartShopping = () => {
     if (listName.trim()) {
-      // Create new shopping 
+      // Create new shopping
       const newList = {
         name: listName,
         userId: user?.id,
@@ -157,7 +156,7 @@ export default function ShoppingPlatform() {
             </div>
 
             {/* Search Input */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg
@@ -181,7 +180,7 @@ export default function ShoppingPlatform() {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Promotional Banner Carousel */}
 
@@ -189,62 +188,33 @@ export default function ShoppingPlatform() {
 
             {/* Bu  oraliqa  baner chaqiriladi   */}
 
-            <div className="mb-9">
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">
+            <div className="mb-9 py-8">
+              <h2 className="text-3xl font-bold text-gray-900  mb-3">
                 {t("chooseCategory")}
               </h2>
               <p className="text-gray-600">{t("chooseCategoryDesc")}</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex justify-center mb-20">
+              {" "}
+              {/* ostidan joy tashlash uchun mb-10 */}
               <Card
                 onClick={() => setOpen(true)}
-                className="group cursor-pointer flex flex-col items-center justify-center rounded-2xl bg-[#85dc3c] hover:bg-gray-100 transition-all duration-300"
+                className="group cursor-pointer flex flex-col items-center justify-center 
+       rounded-2xl bg-[#85dc3c] hover:bg-gray-100 transition-all duration-300 
+       w-[500px] h-[250px] shadow-lg 
+       sm:w-[350px] sm:h-[200px] md:w-[400px] md:h-[220px] lg:w-[1000px] lg:h-[330px]"
               >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <div className="flex items-center justify-center w-20 h-20 rounded-full ">
-                    <ShoppingCart className="h-20 w-20 text-white group-hover:text-[#30c3c4] transition-colors duration-300" />
-                  </div>
-                  <p className="mt-2 text-2xl font-bold text-white group-hover:text-[#30c3c4] transition-colors duration-300">
+                <CardContent className="flex flex-col items-center justify-center text-center p-8">
+                  <ShoppingCart className="h-20 w-20 text-white group-hover:text-[#30c3c4] transition-colors duration-300" />
+                  <p className="mt-6 text-2xl font-bold text-white group-hover:text-[#30c3c4] transition-colors duration-300">
                     {t("others")}
                   </p>
-                  <p className="mt-1 text-2xl font-bold text-white group-hover:text-[#30c3c4] transition-colors duration-300">
+                  <p className="mt-2 text-2xl font-bold text-white group-hover:text-[#30c3c4] transition-colors duration-300">
                     {t("others1")}
                   </p>
                 </CardContent>
               </Card>
-
-              {data?.items?.map((category) => (
-                <Card
-                  key={category.id}
-                  className="group cursor-pointer rounded-2xl overflow-hidden border-2 border-transparent bg-gradient-to-r from-[#09bcbf] to-[#5ce1e6] p-[2px] shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.03]"
-                  onClick={() => handleCategoryClick(category.id)}
-                >
-                  <div className="bg-white rounded-2xl h-full flex flex-col">
-                    <CardContent className="p-0 text-center flex-1 flex flex-col">
-                      {/* Rasm qismi */}
-                      <div className="relative w-full h-44 overflow-hidden rounded-t-2xl">
-                        <img
-                          src={category.image}
-                          alt={category.titleUz}
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                        />
-                        {/* Hover overlay */}
-                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      </div>
-                      {/* Text qismi */}
-                      <h3 className="text-lg font-semibold px-4 py-3 text-gray-800 group-hover:text-[#09bcbf] transition-colors duration-300">
-                        {i18n.language == "uz"
-                          ? category?.titleUz
-                          : i18n.language == "ru"
-                          ? category?.titleRu
-                          : category?.titleEn}
-                      </h3>
-                    </CardContent>
-                  </div>
-                </Card>
-              ))}
               {/* Boshqalar cardi */}
-
               {/* Modal (Dialog) */}
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="sm:max-w-md">

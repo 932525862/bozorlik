@@ -1,5 +1,7 @@
 {
   "welcome": "Hello, welcome!",
+  "home": "Home",
+  "settings":"Settings",
   "basket": "Basket",
   "title": "Shopping List",
   "createList": "Create List",
@@ -44,7 +46,8 @@
   "paid": "Paid",
   "currency": "UZS",
   "history": "History",
-
+  "historyx": "Wholesale goods",
+  "historym": "Goods",
   "basket1": {
     "title": "Shopping Cart",
     "subtitle": "Track your shopping process and expenses",
