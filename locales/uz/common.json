@@ -202,7 +202,7 @@
   "basket.addDialogDescription": "Sotib olmoqchi bo'lgan miqdorni kiriting",
   "basket.quantityLabel": "Miqdor ({{unit}})",
   "basket.quantityPlaceholder": "masalan, 2.5",
-  "basket.unitLabel": "Birlikni tanlang",
+  
   "basket.unitPlaceholder": "Birlik tanlang",
   "basket.marketLabel": "Bozorlikni tanlang",
   "basket.marketPlaceholder": "Bozorlik tanlang",
