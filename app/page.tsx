@@ -31,7 +31,7 @@ import {
 
 import backrimg from "../public/bosqa.png";
 import BannerCarousel from "../app/baner/baner";
-// Mock registered users for demonstration
+
 
 export default function ShoppingPlatform() {
   const router = useRouter();
@@ -78,7 +78,7 @@ export default function ShoppingPlatform() {
 
   const handleStartShopping = () => {
     if (listName.trim()) {
-      // Create new shopping list
+      // Create new shopping 
       const newList = {
         name: listName,
         userId: user?.id,

@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useShoppingStore } from "@/store/shoppingStore";
 import { useTranslation } from "react-i18next";
-import { ShoppingCart, Trash2 } from "lucide-react";
+import { ShoppingCart, Trash2 , Pencil  } from "lucide-react";
 import useApiMutation from "@/hooks/useMutation";
 import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
@@ -125,30 +125,43 @@ const Page = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {shoppingList?.map((market: any) => (
             <Card
-              key={market.id}
-              className="relative cursor-pointer rounded-2xl bg-gradient-to-br from-teal-50 to-white 
-                   shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
-            >
+            key={market.id}
+            className="relative cursor-pointer rounded-2xl bg-gradient-to-br from-teal-50 to-white 
+                 shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
+          >
+            <div className="absolute top-3 right-3 flex gap-2">
+               {/* Edit button */}
+               <button
+                onClick={() => console.log("Edit clicked", market?.id)}
+                className="bg-[#30c3c4] hover:bg-[#85dc3c] text-white p-2 rounded-lg"
+              >
+                <Pencil size={18} />
+              </button>
+              {/* Delete button */}
               <button
                 disabled={isDeleting}
                 onClick={() => handleDelete(market?.id)}
-                className="absolute top-3 right-3 bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg"
+                className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg"
               >
                 <Trash2 size={18} />
               </button>
-
-              <CardContent
-                onClick={() => handleBasketClick(market?.id)}
-                className="p-6 flex flex-col items-center text-center"
-              >
-                <div className="w-14 h-14 mb-3 flex items-center justify-center rounded-full bg-teal-100 text-teal-700">
-                  <ShoppingCart className="h-9 w-9 text-[#30c3c4] transition-colors duration-300" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {market.name}
-                </h3>
-              </CardContent>
-            </Card>
+          
+             
+            </div>
+          
+            <CardContent
+              onClick={() => handleBasketClick(market?.id)}
+              className="p-6 flex flex-col items-center text-center"
+            >
+              <div className="w-14 h-14 mb-3 flex items-center justify-center rounded-full bg-teal-100 text-teal-700">
+                <ShoppingCart className="h-9 w-9 text-[#30c3c4] transition-colors duration-300" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800">
+                {market.name}
+              </h3>
+            </CardContent>
+          </Card>
+          
           ))}
         </div>
       )}

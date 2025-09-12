@@ -139,7 +139,8 @@
   "agree": "."
 },
 "toast": {
-  "loginSuccess": "Вы успешно вошли в систему"
+  "loginSuccess": "Вы успешно вошли в систему",
+  "productPurchased":"Товар куплен"
 },
 "languages": {
   "uz": "Uzb",
