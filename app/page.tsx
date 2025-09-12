@@ -327,7 +327,7 @@ export default function ShoppingPlatform() {
                 />
               </div>
             </div>
-            <DialogFooter>
+            <DialogFooter> 
               <Button
                 onClick={handleStartShopping}
                 className="cursor-pointer"
