@@ -563,7 +563,7 @@ const page = () => {
                     : selectedProduct?.productName}
                 </h3>
                 <p className="text-sm text-gray-600">
-                  {selectedProduct?.quantity} kg
+                  {selectedProduct?.quantity} {selectedProduct?.unit}
                 </p>
               </div>
             </div>
