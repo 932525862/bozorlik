@@ -10,6 +10,13 @@ export const useShoppingStore = create<any>((set) => ({
       shoppingList: [...state.shoppingList, newItem],
     })),
 
+    updateShoppingItemName: (id: string, newName: string) =>
+      set((state: any) => ({
+        shoppingList: state.shoppingList.map((item: any) =>
+          item.id === id ? { ...item, name: newName } : item
+        ),
+      })),
+
   setShoppingListAll: (newItemAll: any) =>
     set(() => ({
       shoppingList: newItemAll,

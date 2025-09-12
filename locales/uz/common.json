@@ -25,6 +25,9 @@
   "shoppingListNameLabel": "Bozorlik ro'yxati nomi",
   "shoppingListNamePlaceholder": "masalan, Haftalik oziq-ovqat, Ziyofat uchun bozorlik...",
   "createListBtn": "Ro'yxat yaratish",
+  "editShoppingListTitle": "Bozorlik ro'yxatini tahrirlash",
+  "editShoppingListDesc": "Ro'yxat nomini o'zgartiring va saqlang",
+  "saveListBtn": "O'zgarishlarni saqlash",
   "markets":"Sizda ayni vaqtda faol bozorlik ro‘yxati yo‘q",
   "extraProductTitle": "Qo'shimcha mahsulot qo'shish",
   "extraProductDesc": "Ro'yxatda yo'q mahsulot nomi va miqdorini kiriting",
@@ -211,6 +214,8 @@
   "basket.marketPlaceholder": "Bozorlik tanlang",
   "basket.addButton": "Savatga qo'shish",
   "basket.delete.message": "Bozorlik savati o'chirildi",
+  "basket.create.success": "Bozorlik muvaffaqiyatli qo'shildi",
+  "basket.edit.success": "Bozorlik muvaffaqiyatli o'zgartirildi",
   "auth": {
     "enterCode": "Telefon nomeringizga kelgan kodni kiriting",
     "passwordChanged": "Parol muvaffaqiyatli o'zgartirildi",

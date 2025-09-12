@@ -128,7 +128,6 @@ const Page = () => {
   useEffect(() => {
     getData();
   }, [id]);
- console.log(shoppingHistory);
  
   const totalPrice = shoppingHistory?.marketLists?.reduce(
     (acc: any, p: any) => acc + p.price * p.quantity,

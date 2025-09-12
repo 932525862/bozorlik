@@ -23,7 +23,7 @@ import { useStore } from "@/store/userStore";
 
 const Page = () => {
   const router = useRouter();
-  const { shoppingList, setShoppingList, setShoppingId, removeShoppingItem } =
+  const { shoppingList, setShoppingList, setShoppingId, removeShoppingItem, updateShoppingItemName } =
     useShoppingStore();
   const { t } = useTranslation("common");
   const [marketId, setMarketId] = useState<string>();
@@ -31,6 +31,7 @@ const Page = () => {
 
   const [listName, setListName] = useState("");
   const [showStartDialog, setShowStartDialog] = useState(false);
+  const [showChangeName, setShowChangeName] = useState(false);
 
   // DELETE uchun
   const { mutate: deleteMarket, isLoading: isDeleting } = useApiMutation({
@@ -39,6 +40,7 @@ const Page = () => {
     onSuccess: () => {
       removeShoppingItem(marketId);
       toast.success(t("basket.delete.message"));
+      setMarketId("")
     },
     onError: (error: any) => {
       toast.error(error.response?.data?.message);
@@ -55,6 +57,22 @@ const Page = () => {
       toast.success(t("basket.create.success"));
       setShowStartDialog(false);
       setListName("");
+      setMarketId("")
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message);
+    },
+  });
+
+  const { mutate: EditMarket, isLoading: isEdit } = useApiMutation({
+    url: `market/${marketId}`,
+    method: "PATCH",
+    onSuccess: (data) => {
+      updateShoppingItemName(marketId, data?.data?.name)
+      toast.success(t("basket.edit.success"));
+      setShowChangeName(false);
+      setListName("");
+      setMarketId("")
     },
     onError: (error: any) => {
       toast.error(error.response?.data?.message);
@@ -78,10 +96,26 @@ const Page = () => {
     }
   };
 
+  const handleEditName = () => {
+    if (listName.trim()) {
+      const newList = {
+        name: listName,
+      };
+      EditMarket(newList); // ✅ POST uchun to‘g‘rilandi
+    } else {
+      toast.error(t("basket.create.error"));
+    }
+  };
+
   const handleDelete = (id: string) => {
     setMarketId(id);
     deleteMarket({ id }); // ✅ DELETE uchun to‘g‘rilandi
   };
+
+  const handleChangeName = (id: string) => {
+    setMarketId(id)
+    setShowChangeName(true)
+  }
 
   return (
     <div className="max-w-7xl mx-auto p-7">
@@ -95,7 +129,7 @@ const Page = () => {
         </div>
         <Button
           className="rounded-xl px-5 py-2 text-white cursor-pointer bg-[#85dc3c] hover:bg-[#30c3c4]"
-          onClick={() => router.push("/")}
+          onClick={() => setShowStartDialog(true)}
         >
           {t("createListBtn")}
         </Button>
@@ -132,7 +166,7 @@ const Page = () => {
             <div className="absolute top-3 right-3 flex gap-2">
                {/* Edit button */}
                <button
-                onClick={() => console.log("Edit clicked", market?.id)}
+                onClick={() => handleChangeName(market?.id)}
                 className="bg-[#30c3c4] hover:bg-[#85dc3c] text-white p-2 rounded-lg"
               >
                 <Pencil size={18} />
@@ -167,6 +201,36 @@ const Page = () => {
       )}
 
       {/* Modal dialog */}
+      <Dialog open={showChangeName} onOpenChange={setShowChangeName}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("editShoppingListTitle")}</DialogTitle>
+            <DialogDescription>
+              {t("editShoppingListDesc")}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="listName">{t("shoppingListNameLabel")}</Label>
+              <Input
+                id="listName"
+                value={listName}
+                onChange={(e) => setListName(e.target.value)}
+                placeholder={t("shoppingListNamePlaceholder")}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              onClick={handleEditName}
+              className="cursor-pointer"
+              disabled={!listName.trim() || isEdit}
+            >
+              {t("saveListBtn")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <Dialog open={showStartDialog} onOpenChange={setShowStartDialog}>
         <DialogContent>
           <DialogHeader>
