@@ -491,7 +491,7 @@ export default function RegisterForm() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="flex justify-between mt-4 space-x-2">
+          <div className="flex justify-center mt-4 gap-2">
             {code.map((digit, i) => (
               <Input
                 key={i}

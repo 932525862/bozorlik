@@ -1,5 +1,5 @@
 "use client";
-import { User } from "lucide-react"
+import { User } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { deleteCookie } from "cookies-next";
@@ -31,6 +31,7 @@ export default function ProfilePage() {
   const [timeLeft, setTimeLeft] = useState(120);
   const [canResend, setCanResend] = useState(false);
   const [dataResponse, setDataResponse] = useState<any>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleLogout = () => {
     deleteCookie("token");
@@ -38,18 +39,20 @@ export default function ProfilePage() {
     clearUser();
   };
 
-  // 🆕 Hisobni o‘chirish API chaqiruvi
-  const { mutate: deleteUser, isLoading: deleteLoading } = useApiMutation({
+  const { mutate: deleteUser, isLoading: isDeleting } = useApiMutation({
     url: `/user/${user?.id}`,
     method: "DELETE",
     onSuccess: () => {
-      toast.success("Hisob muvaffaqiyatli o‘chirildi");
-      deleteCookie("token");
-      clearUser();
-      router.push("/login");
+      toast.success(t("user.deleted")); // Muvaffaqiyatli o‘chirildi
+      deleteCookie("token"); // 🍪 tokenni o‘chiramiz
+      clearUser(); // 🧹 store tozalanadi
+      setDeleteModal(false); // modal yopiladi
+      router.push("/login"); // 🔄 login sahifaga yo‘naltiramiz
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.message || "Xatolik yuz berdi");
+      toast.error(
+        error.response?.data?.message || t("error.somethingWentWrong")
+      );
     },
   });
   const { mutate, isLoading } = useApiMutation({
@@ -202,18 +205,20 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-     <div className="flex justify-between mb-3">
+      <div className="flex justify-between mb-3">
         <button
-          onClick={() => {router.push("/")}}
+          onClick={() => {
+            router.push("/");
+          }}
           className="px-4 py-2 cursor-pointer bg-green-600 text-white rounded-xl hover:bg-green-700"
         >
-          Orqaga
+          {t("back")}
         </button>
         <button
           onClick={handleLogout}
           className="px-4 py-2 bg-red-600 text-white rounded-xl cursor-pointer hover:bg-gray-500"
         >
-          Tizimdan Chiqish
+          {t("logout")}
         </button>
       </div>
 
@@ -234,12 +239,12 @@ export default function ProfilePage() {
 
       {/* 🆕 Hisobni o‘chirish tugmasi */}
       <div className="mb-8 p-4 border rounded-2xl shadow-sm">
-        <h3 className="text-lg font-semibold mb-3">Hisobni o‘chirish</h3>
+        <h3 className="text-lg font-semibold mb-3">{t("deleteAccount")}</h3>
         <button
           onClick={() => setDeleteModal(true)}
           className="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 cursor-pointer"
         >
-          Hisobni o‘chirish
+          {t("deleteAccount")}
         </button>
       </div>
 
@@ -248,11 +253,8 @@ export default function ProfilePage() {
         <DialogContent className="fixed top-1/2 left-1/2 w-[90%] max-w-sm -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl p-6 shadow-lg">
           <DialogHeader>
             <DialogTitle className="text-lg font-semibold text-gray-800">
-              Haqiqatan ham hisobni o‘chirmoqchimisiz?
+              {t("deleteAccountConfirm")}
             </DialogTitle>
-            <DialogDescription className="text-sm text-gray-500">
-              Bu amalni ortga qaytarib bo‘lmaydi!
-            </DialogDescription>
           </DialogHeader>
 
           <div className="flex justify-end gap-3 mt-6">
@@ -261,19 +263,14 @@ export default function ProfilePage() {
               variant="outline"
               className="cursor-pointer"
             >
-              Yo‘q
+              {t("cancel1")}
             </Button>
             <Button
-              onClick={() => deleteUser()}
-              disabled={deleteLoading}
-              className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
-            >
-              {deleteLoading ? (
-                <Loader2 className="animate-spin h-4 w-4 mr-2" />
-              ) : (
-                "Ha"
-              )}
-            </Button>
+  onClick={() => deleteUser({})} 
+  disabled={isDeleting}
+>
+  {isDeleting ? t("deleting") : t("delete")}
+</Button>
           </div>
         </DialogContent>
       </Dialog>
