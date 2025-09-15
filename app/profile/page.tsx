@@ -1,5 +1,5 @@
 "use client";
-
+import { User } from "lucide-react"
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { deleteCookie } from "cookies-next";
@@ -25,9 +25,10 @@ export default function ProfilePage() {
   const router = useRouter();
   const { clearUser, user, setUserChange } = useStore();
   const [verify, setVerify] = useState<boolean>(false);
+  const [deleteModal, setDeleteModal] = useState<boolean>(false); // 🆕 Hisobni o‘chirish modal state
   const [code, setCode] = useState(["", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [timeLeft, setTimeLeft] = useState(120); // 2 minut = 120 sekund
+  const [timeLeft, setTimeLeft] = useState(120);
   const [canResend, setCanResend] = useState(false);
   const [dataResponse, setDataResponse] = useState<any>(null);
 
@@ -36,6 +37,21 @@ export default function ProfilePage() {
     router.push("/login");
     clearUser();
   };
+
+  // 🆕 Hisobni o‘chirish API chaqiruvi
+  const { mutate: deleteUser, isLoading: deleteLoading } = useApiMutation({
+    url: `/user/${user?.id}`,
+    method: "DELETE",
+    onSuccess: () => {
+      toast.success("Hisob muvaffaqiyatli o‘chirildi");
+      deleteCookie("token");
+      clearUser();
+      router.push("/login");
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message || "Xatolik yuz berdi");
+    },
+  });
   const { mutate, isLoading } = useApiMutation({
     url: `/user/change/phone-number/${user?.id}`,
     method: "POST",
@@ -186,10 +202,10 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <div className="flex justify-between mb-3">
-      <button
+     <div className="flex justify-between mb-3">
+        <button
           onClick={() => {router.push("/")}}
-          className="px-4 py-2 cursor-pointer  bg-green-600 text-white rounded-xl hover:bg-green-700"
+          className="px-4 py-2 cursor-pointer bg-green-600 text-white rounded-xl hover:bg-green-700"
         >
           Orqaga
         </button>
@@ -197,14 +213,15 @@ export default function ProfilePage() {
           onClick={handleLogout}
           className="px-4 py-2 bg-red-600 text-white rounded-xl cursor-pointer hover:bg-gray-500"
         >
-          Chiqish
+          Tizimdan Chiqish
         </button>
       </div>
+
       {/* Profil Header */}
       <div className="flex items-center justify-between gap-4 mb-8 p-4 border rounded-2xl shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center text-xl font-bold text-white">
-            A
+            <User className="h-8 w-8 text-blue-600" />
           </div>
           <div>
             <h2 className="text-xl font-semibold">{user?.fullName}</h2>
@@ -213,9 +230,53 @@ export default function ProfilePage() {
             </p>
           </div>
         </div>
-
-        {/* Logout button tepada */}
       </div>
+
+      {/* 🆕 Hisobni o‘chirish tugmasi */}
+      <div className="mb-8 p-4 border rounded-2xl shadow-sm">
+        <h3 className="text-lg font-semibold mb-3">Hisobni o‘chirish</h3>
+        <button
+          onClick={() => setDeleteModal(true)}
+          className="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 cursor-pointer"
+        >
+          Hisobni o‘chirish
+        </button>
+      </div>
+
+      {/* 🆕 Hisobni o‘chirish Modal */}
+      <Dialog open={deleteModal} onOpenChange={setDeleteModal}>
+        <DialogContent className="fixed top-1/2 left-1/2 w-[90%] max-w-sm -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl p-6 shadow-lg">
+          <DialogHeader>
+            <DialogTitle className="text-lg font-semibold text-gray-800">
+              Haqiqatan ham hisobni o‘chirmoqchimisiz?
+            </DialogTitle>
+            <DialogDescription className="text-sm text-gray-500">
+              Bu amalni ortga qaytarib bo‘lmaydi!
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex justify-end gap-3 mt-6">
+            <Button
+              onClick={() => setDeleteModal(false)}
+              variant="outline"
+              className="cursor-pointer"
+            >
+              Yo‘q
+            </Button>
+            <Button
+              onClick={() => deleteUser()}
+              disabled={deleteLoading}
+              className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+            >
+              {deleteLoading ? (
+                <Loader2 className="animate-spin h-4 w-4 mr-2" />
+              ) : (
+                "Ha"
+              )}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Telefon raqamni almashtirish */}
       <div className="mb-8 p-4 border rounded-2xl shadow-sm">
