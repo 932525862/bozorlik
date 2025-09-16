@@ -264,5 +264,8 @@
   "market_title": "Покупки",
   "success_phone_changed": "Ваш номер телефона был изменен",
   "success_feedback_sent": "Ваши отзывы и предложения отправлены!",
-  "button_delete": "Удалить"
+  "button_delete": "Удалить",
+  "user": {
+  "deleted": "Ваш аккаунт был успешно удалён"
+}
 }

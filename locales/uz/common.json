@@ -271,8 +271,10 @@
    "button_download": "Yuklash",
    "success_phone_changed": "Telefon nomeringiz almashtirildi",
    "success_feedback_sent": "Tablab va takliflaringiz yuborildi!",
-    "button_delete": "O‘chirish"
-
+    "button_delete": "O‘chirish",
+  "user" : {
+    "deleted": "Hisobingiz muvaffaqiyatli o'chirildi"
+  }
    
 
 }

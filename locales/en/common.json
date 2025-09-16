@@ -270,5 +270,9 @@
   "button_download": "Download",
   "success_phone_changed": "Your phone number has been changed",
   "success_feedback_sent": "Your feedback and suggestions have been sent!",
-  "button_delete": "Delete"
+  "button_delete": "Delete",
+  "user": {
+  "deleted": "Your account has been successfully deleted"
+}
+
 }

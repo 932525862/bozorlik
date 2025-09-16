@@ -31,7 +31,6 @@ export default function ProfilePage() {
   const [timeLeft, setTimeLeft] = useState(120);
   const [canResend, setCanResend] = useState(false);
   const [dataResponse, setDataResponse] = useState<any>(null);
-  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleLogout = () => {
     deleteCookie("token");
@@ -40,7 +39,7 @@ export default function ProfilePage() {
   };
 
   const { mutate: deleteUser, isLoading: isDeleting } = useApiMutation({
-    url: `/user/${user?.id}`,
+    url: `/user`,
     method: "DELETE",
     onSuccess: () => {
       toast.success(t("user.deleted")); // Muvaffaqiyatli o‘chirildi
@@ -266,8 +265,9 @@ export default function ProfilePage() {
               {t("cancel1")}
             </Button>
             <Button
-  onClick={() => deleteUser({})} 
+  onClick={() => deleteUser({id: user?.id})} 
   disabled={isDeleting}
+  className="cursor-pointer"
 >
   {isDeleting ? t("deleting") : t("delete")}
 </Button>
